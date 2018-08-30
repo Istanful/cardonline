@@ -1,8 +1,7 @@
 # Cardonline
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cardonline`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem is a simple wrapper around the cardonline API. You can find their
+documentation (here)[http://cardonline.se/doc/].
 
 ## Installation
 
@@ -22,13 +21,87 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Installation
+The only installation needed is adding the username and password to be used in
+the API. The client will perform basic auth to perform the requests.
 
-## Development
+```ruby
+Cardonline.configure do |config|
+  config.username = "username"
+  config.password = "password"
+end
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+This gem follows the `Safettp` pattern for perform requests, which means you
+have to provide a path for both the success state and the failure state. You can
+read more (here)[https://github.com/Istanful/safettp].
+```ruby
+Cardonline.get_card(1) do |result|
+  result.on_success do |response|
+    puts response.parsed_body
+  end
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+  result.on_failure do |response|
+    puts response.http_response.code
+  end
+end
+```
+
+### Get a card
+Fetch a card with the provided id.
+```ruby
+Cardonline.get_card(1) do |result|
+  result.on_success do |response|
+  end
+
+  result.on_failure do |response|
+  end
+end
+```
+
+Add a card with the provided attributes.
+```ruby
+Cardonline.add_card({ name: 'Christian' }) do |result|
+  result.on_success do |response|
+  end
+
+  result.on_failure do |response|
+  end
+end
+```
+
+Update a card with the provided id with the provided attributes.
+```ruby
+Cardonline.update_card(1, { name: 'James' }) do |result|
+  result.on_success do |response|
+  end
+
+  result.on_failure do |response|
+  end
+end
+```
+
+Retrieve the performed orders.
+```ruby
+Cardonline.get_orders do |result|
+  result.on_success do |response|
+  end
+
+  result.on_failure do |response|
+  end
+end
+```
+
+Retrieve a specific order.
+```ruby
+Cardonline.get_order(1) do |result|
+  result.on_success do |response|
+  end
+
+  result.on_failure do |response|
+  end
+end
+```
 
 ## Contributing
 
