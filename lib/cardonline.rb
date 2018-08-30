@@ -1,13 +1,10 @@
 require "cardonline/version"
 require "safettp"
+require "cardonline/client"
 
 module Cardonline
   class << self
-    attr_writer :config
-
-    def config
-      @config || Configuration.new
-    end
+    attr_accessor :config
   end
 
   class Configuration
@@ -19,9 +16,10 @@ module Cardonline
   end
 
   def self.configure
-    yield(config)
+    @config ||= Configuration.new
+    yield(@config)
+    Cardonline::Client.configure_from_master(@config)
   end
 end
 
-require "cardonline/client"
 

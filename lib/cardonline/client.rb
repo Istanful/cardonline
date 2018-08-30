@@ -1,15 +1,17 @@
 class Cardonline::Client
   include Safettp::Client
 
-  configure do |config|
-    config.base_url = Cardonline.config.base_url
-    config.default_options = {
-      auth: {
-        type: :basic,
-        username: Cardonline.config.username,
-        password: Cardonline.config.password
+  def self.configure_from_master(master_config)
+    configure do |config|
+      config.base_url = master_config.base_url
+      config.default_options = {
+        auth: {
+          type: :basic,
+          username: master_config.username,
+          password: master_config.password
+        }
       }
-    }
+    end
   end
 
   def add_card(template_id, body, &block)
