@@ -2,7 +2,7 @@ class Cardonline::Client
   include Safettp::Client
 
   configure do |config|
-    config.base_url = 'https://cardonline.se/test_api'
+    config.base_url = Cardonline.config.base_url
   end
 
   def add_card(template_id, body, &block)
