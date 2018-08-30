@@ -20,4 +20,8 @@ class Cardonline::Client
   def get_order(order_id, &block)
     get("/orders/#{order_id}", &block)
   end
+
+  def get_orders(&block)
+    get("/orders", &block)
+  end
 end

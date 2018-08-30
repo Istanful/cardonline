@@ -58,6 +58,19 @@ RSpec.describe Cardonline::Client do
     end
   end
 
+  describe '#get_orders' do
+    it 'performs a GET request to the appropriate url' do
+      url = "#{base_url}/orders"
+      body = { name: 'Bertil' }
+      stubbed_request = stub_request(:get, url)
+      client = described_class.new
+
+      client.get_orders(&covering_block)
+
+      expect(stubbed_request).to have_been_made
+    end
+  end
+
   def covering_block
     ->(result) {
       result.on_success {}
