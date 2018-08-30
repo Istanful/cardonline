@@ -30,6 +30,20 @@ RSpec.describe Cardonline::Client do
     end
   end
 
+  describe '#update_card' do
+    it 'performs a PUT request to the appropriate url' do
+      card_id = 1
+      url = "#{base_url}/cards/#{card_id}"
+      body = { name: 'Bertil' }
+      stubbed_request = stub_request(:put, url).with(body: body.to_json)
+      client = described_class.new
+
+      client.update_card(card_id, body, &covering_block)
+
+      expect(stubbed_request).to have_been_made
+    end
+  end
+
   def covering_block
     ->(result) {
       result.on_success {}

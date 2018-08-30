@@ -12,4 +12,8 @@ class Cardonline::Client
   def get_card(card_id, &block)
     get("/cards/#{card_id}", &block)
   end
+
+  def update_card(card_id, attributes, &block)
+    put("/cards/#{card_id}", body: attributes, &block)
+  end
 end
