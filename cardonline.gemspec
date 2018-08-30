@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "cardonline"
   spec.version       = Cardonline::VERSION
   spec.authors       = ["Emric"]
-  spec.email         = ["w.e.w@live.se"]
+  spec.email         = ["emric.mansson@gmail.com"]
 
   spec.summary       = %q{A thin wrapper around the cardonline api}
   spec.description   = %q{A thin wrapper around the cardonline api}
