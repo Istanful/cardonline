@@ -1,4 +1,5 @@
 require "cardonline/version"
+require "forwardable"
 require "safettp"
 require "cardonline/client"
 
