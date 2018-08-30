@@ -8,4 +8,8 @@ class Cardonline::Client
   def add_card(template_id, body, &block)
     post('/cards', body: body, query: { template_id: template_id }, &block)
   end
+
+  def get_card(card_id, &block)
+    get("/cards/#{card_id}", &block)
+  end
 end
