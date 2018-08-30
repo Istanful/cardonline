@@ -3,6 +3,17 @@ require 'spec_helper'
 RSpec.describe Cardonline::Client do
   let(:base_url) { Cardonline::Client.config.base_url }
 
+  it 'uses basic auth to perform requests' do
+    url = "#{base_url}/orders"
+    client = described_class.new
+    auth = [Cardonline.config.username.to_s, Cardonline.config.password.to_s]
+    stubbed_request = stub_request(:get, url).with(basic_auth: auth)
+
+    client.get_orders(&covering_block)
+
+    expect(stubbed_request).to have_been_made
+  end
+
   describe '#add_card' do
     it 'performs a POST request to the appropriate url' do
       template_id = 1

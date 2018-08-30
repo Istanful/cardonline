@@ -3,6 +3,13 @@ class Cardonline::Client
 
   configure do |config|
     config.base_url = Cardonline.config.base_url
+    config.default_options = {
+      auth: {
+        type: :basic,
+        username: Cardonline.config.username,
+        password: Cardonline.config.password
+      }
+    }
   end
 
   def add_card(template_id, body, &block)
