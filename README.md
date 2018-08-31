@@ -1,7 +1,7 @@
 # Cardonline
 
 This gem is a simple wrapper around the cardonline API. You can find their
-documentation (here)[http://cardonline.se/doc/].
+documentation [here](http://cardonline.se/doc/)
 
 ## Installation
 
@@ -34,7 +34,7 @@ end
 
 This gem follows the `Safettp` pattern for perform requests, which means you
 have to provide a path for both the success state and the failure state. You can
-read more (here)[https://github.com/Istanful/safettp].
+read more [here](https://github.com/Istanful/safettp).
 ```ruby
 Cardonline.get_card(1) do |result|
   result.on_success do |response|
@@ -105,7 +105,7 @@ end
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/cardonline.
+Bug reports and pull requests are welcome on GitHub at https://github.com/istanful/cardonline.
 
 ## License
 
